@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tikvid/botnavigation/botnav.dart';
 import 'package:tikvid/botnavigation/homescreeninapp.dart';
 import 'package:tikvid/contoller/loginauth.dart';
+import 'package:tikvid/contoller/profiledata.dart';
+import 'package:tikvid/entityclases/userdata.dart';
 import 'package:tikvid/loginchoices.dart';
 import 'package:tikvid/onboard.dart';
 
@@ -31,6 +33,28 @@ class _SplashScreenState extends State<SplashScreen> {
     final isFirstLaunch = prefs.getBool('first_launch') ?? true;
     final authService = Provider.of<AuthService>(context, listen: false);
     final isLoggedIn = await authService.isLoggedIn();
+    if(isLoggedIn){
+    final temp=ApiRepository();
+    final profileResponse = await temp.getProfile();
+   // final postresponse=await temp.getPosts();
+   // print(postresponse);
+   if (profileResponse['success'] == true) {
+  // Access user data
+  final userData = profileResponse['message']['userData'];
+ 
+  Userdata.userId = userData['_id'];
+  Userdata.phoneNumber = userData['phoneNumber'];
+  Userdata.profileImage = userData['profileImage']; // nullable
+  Userdata.isBlocked = userData['blocked'];
+  Userdata.country = userData['country'] ?? ''; // empty string if not set
+  Userdata.reels = profileResponse['message']['userReels'] ?? []; // empty array if not set
+  //Userdata.posts = postresponse['data']['posts'] ?? []; // empty array if not set
+
+  
+} else {
+  print('Failed to fetch profile');
+}
+    }
 
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tikvid/botnavigation/ProfileScreen.dart';
 import 'package:tikvid/botnavigation/homescreeninapp.dart';
 
 class BotNave extends StatefulWidget {
@@ -231,9 +232,9 @@ class ChatScreen extends StatelessWidget {
   }
 }
 
-class ProfileScreen extends StatelessWidget {
+/*class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(child: Text('Profile Screen'));
   }
-}
+}*/
