@@ -164,7 +164,7 @@ class MemoriesScreen extends StatelessWidget {
                   return ClipRRect(
                     borderRadius: BorderRadius.circular(12.0),
                     child: Image.asset(
-                      'assets/placeholder_poster.png', // <-- Add your temp pic here
+                      'images/postsplaceholder.jfif', // <-- Add your temp pic here
                       fit: BoxFit.cover,
                     ),
                   );

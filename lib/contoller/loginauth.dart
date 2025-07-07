@@ -55,6 +55,7 @@ class AuthService {
 
   Future<bool> isLoggedIn() async {
     final prefs = await SharedPreferences.getInstance();
+    print(prefs.get( 'authToken'));
     return prefs.containsKey('authToken');
   }
 

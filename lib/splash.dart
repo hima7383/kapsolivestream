@@ -30,6 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (!mounted) return;
     
     final prefs = await SharedPreferences.getInstance();
+    print(prefs.get("authToken"));
     final isFirstLaunch = prefs.getBool('first_launch') ?? true;
     final authService = Provider.of<AuthService>(context, listen: false);
     final isLoggedIn = await authService.isLoggedIn();
@@ -49,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Userdata.isBlocked = userData['blocked'] ?? false;
   Userdata.country = userData['country']; // empty string if not set
   Userdata.reels = profileResponse.message['userReels'] ?? []; // empty array if not set
-  //Userdata.posts = postresponse['data']['posts'] ?? []; // empty array if not set
+  Userdata.posts = postresponse.data; // empty array if not set
 
   
  

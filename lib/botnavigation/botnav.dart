@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tikvid/addpost.dart';
 import 'package:tikvid/botnavigation/ProfileScreen.dart';
 import 'package:tikvid/botnavigation/homescreeninapp.dart';
+import 'package:tikvid/postspage.dart';
 
 class BotNave extends StatefulWidget {
   @override
@@ -15,7 +16,8 @@ class _BotNaveState extends State<BotNave> {
 
   final List<Widget> _screens = [
     HomeScreenInApp(),
-    EventsScreen(),
+    PostsScreen(),
+  /*  EventsScreen(),*/
     CreateContentWidget(),
    // AddPostScreen(),
     ChatScreen(),
