@@ -36,24 +36,23 @@ class _SplashScreenState extends State<SplashScreen> {
     if(isLoggedIn){
     final temp=ApiRepository();
     final profileResponse = await temp.getProfile();
-   // final postresponse=await temp.getPosts();
-   // print(postresponse);
-   if (profileResponse['success'] == true) {
+    final postresponse=await temp.getPosts();
+    
+    print(postresponse.data);
+   
   // Access user data
-  final userData = profileResponse['message']['userData'];
+  final userData = profileResponse.message['userData'];
  
-  Userdata.userId = userData['_id'];
-  Userdata.phoneNumber = userData['phoneNumber'];
+  Userdata.userId = userData['_id'] ?? '';
+  Userdata.phoneNumber = userData['phoneNumber'] ?? '';
   Userdata.profileImage = userData['profileImage']; // nullable
-  Userdata.isBlocked = userData['blocked'];
-  Userdata.country = userData['country'] ?? ''; // empty string if not set
-  Userdata.reels = profileResponse['message']['userReels'] ?? []; // empty array if not set
+  Userdata.isBlocked = userData['blocked'] ?? false;
+  Userdata.country = userData['country']; // empty string if not set
+  Userdata.reels = profileResponse.message['userReels'] ?? []; // empty array if not set
   //Userdata.posts = postresponse['data']['posts'] ?? []; // empty array if not set
 
   
-} else {
-  print('Failed to fetch profile');
-}
+ 
     }
 
     Navigator.of(context).pushReplacement(
