@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tikvid/entityclases/userdata.dart';
+import 'package:tikvid/moreoptions.dart';
 
 
 
@@ -15,6 +16,7 @@ class MemoriesScreen extends StatelessWidget {
       // like the profile header and the image grid to scroll together.
       body: CustomScrollView(
         slivers: [
+          
           // The App Bar
           SliverAppBar(
             title: const Text(
@@ -29,6 +31,18 @@ class MemoriesScreen extends StatelessWidget {
               icon: const Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () {},
             ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.settings, color: Colors.white), // Settings icon
+                onPressed: () {
+                  // Navigate to the MoreScreen when the settings icon is pressed
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MoreScreen()),
+                  );
+                },
+              ),
+            ],
           ),
           
           // This adapter allows us to use regular widgets inside a CustomScrollView.
@@ -164,7 +178,7 @@ class MemoriesScreen extends StatelessWidget {
                   return ClipRRect(
                     borderRadius: BorderRadius.circular(12.0),
                     child: Image.asset(
-                      'images/postsplaceholder.jfif', // <-- Add your temp pic here
+                      'images/placeholder.png', // <-- Add your temp pic here
                       fit: BoxFit.cover,
                     ),
                   );

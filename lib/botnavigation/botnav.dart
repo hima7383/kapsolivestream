@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tikvid/addpost.dart';
+import 'package:tikvid/allchats.dart';
 import 'package:tikvid/botnavigation/ProfileScreen.dart';
 import 'package:tikvid/botnavigation/homescreeninapp.dart';
 import 'package:tikvid/postspage.dart';
@@ -16,11 +17,12 @@ class _BotNaveState extends State<BotNave> {
 
   final List<Widget> _screens = [
     HomeScreenInApp(),
-    PostsScreen(),
   /*  EventsScreen(),*/
-    CreateContentWidget(),
+    PostsScreen(),
    // AddPostScreen(),
-    ChatScreen(),
+    CreateContentWidget(),
+   AllChatsScreen(),
+    //ChatScreen(),
     ProfileScreen(),
   ];
 

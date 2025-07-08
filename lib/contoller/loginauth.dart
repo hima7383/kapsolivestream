@@ -1,9 +1,63 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+class Message {
+  final String id;
+  final String content;
+  final String senderId;
+  final String receiverId;
+  final String conversationId;
+  final bool isSeen;
+  final DateTime timestamp;
+
+  Message({
+    required this.id,
+    required this.content,
+    required this.senderId,
+    required this.receiverId,
+    required this.conversationId,
+    required this.isSeen,
+    required this.timestamp,
+  });
+
+  factory Message.fromJson(Map<String, dynamic> json) {
+    return Message(
+      id: json['_id'],
+      content: json['message'] ?? '',
+      senderId: json['sender'],
+      receiverId: json['receiver'],
+      conversationId: json['conversation'],
+      isSeen: json['isSeen'] ?? false,
+      timestamp: DateTime.parse(json['createdAt']),
+    );
+  }
+}
+
+class Conversation {
+  final String id;
+  final List<String> participants;
+  final Message lastMessage;
+
+  Conversation({
+    required this.id,
+    required this.participants,
+    required this.lastMessage,
+  });
+
+  factory Conversation.fromJson(Map<String, dynamic> json) {
+    return Conversation(
+      id: json['_id'],
+      participants: List<String>.from(json['participants']),
+      lastMessage: Message.fromJson(json['lastMessage']),
+    );
+  }
+}
 
 class AuthService {
+
+   
   static const String baseUrl = "http://31.97.185.64:3000/auth";
+  
 
   Future<bool> registerWithPhone(String phoneNumber) async {
     //try {
@@ -49,7 +103,7 @@ class AuthService {
         throw Exception(errorData['message'] ?? 'Invalid OTP');
       }
     } catch (e) {
-      throw Exception('Error: ${e.toString()}');
+      throw Exception('Error: wrong otp or user not found}');
     }
   }
 
